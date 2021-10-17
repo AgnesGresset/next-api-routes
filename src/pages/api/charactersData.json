@@ -1,0 +1,19 @@
+{
+	"data": [
+		{
+			"id": 0,
+			"name": "Elisabeth",
+			"lastName": "Bennet"
+		},
+		{
+			"id": 1,
+			"name": "Natasha",
+			"lastName": "Rostova"
+		},
+		{
+			"id": 2,
+			"name": "Agnès",
+			"lastName": "la Chantefleurie"
+		}
+	]
+}
