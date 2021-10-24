@@ -7,7 +7,8 @@ export type CharactersProps = {
 	lastName: string
 }
 
-// Simple example fetching json data stored in App 
+// Simple example fetching json data stored in App
+// TODO: add POST example and check results with Postman
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
 	 try {
 		res.status(200).json(characters)
