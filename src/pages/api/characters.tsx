@@ -1,9 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import characters from './charactersData.json'
 
-// Simple example fetching json data 
+export type CharactersProps = {
+	id: number
+	name: string
+	lastName: string
+}
+
+// Simple example fetching json data stored in App 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-	try {
+	 try {
 		res.status(200).json(characters)
 	} catch (err) {
 		console.log(err)

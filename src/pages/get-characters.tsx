@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { CharactersProps } from './api/characters'
 
 const fetchCharacters = async () => {
 	try {
@@ -7,21 +8,9 @@ const fetchCharacters = async () => {
 		const { status } = chararactersReq
 
 		if (status >= 400) {
-			console.log('ohoh error')
 			throw new Error('Problem somewhere')
 		}
 
-		/**
-		 * Response data
-		 * (correct)
-		 * {
-		 * 	data: {
-		 * 		0: {id: 0, name: Elisabeth...}
-		 * 		1: {id: 1...}
-		 * 		2: {id: 2...}
-		 * 	}
-		 * }
-		 */
 		const resData = await chararactersReq.json()
 		return resData
 	} catch (err) {
@@ -31,31 +20,26 @@ const fetchCharacters = async () => {
 }
 
 const Characters = () => {
-	/**
-	 * When we save the data like this, we will get a Promise { <pending> } when using the variable. 
-	 * It's happening because the Javascript code always executes synchronously,
-	 * so the console.log() function starts immediately after the fetch() request,
-	 * not waiting until it is resolved. In the moment when console.log() function starting to run,
-	 * a Promise that should be returned from a fetch() request is in a pending status.
-	 * We can access the returned value of a Promise object in another .then() callback
-	*/
-	const apiCharacters = fetchCharacters()
-		.then(resp => resp.data)
-		.then(data => {
-			// Also correct, we get the data as array of chars
-			//console.log(data)
-			return data
-		})
+	const [data, setData] = React.useState<CharactersProps[]>([])
 
-	// Still a shitty promise
-	const characters = async () => await apiCharacters
+	React.useEffect(() => {
+		fetchCharacters() 
+			.then(resp => resp.data)
+			.then(data => {
+				setData(data)
+		})
+	}, [data])
 
 	return (
 		<>
 			<div>GET Characters</div>
-			<div>
-
-			</div>
+			<ul>
+				{data.map((character, index) => 
+					<li key={`character${index}`}>
+						{character.name} {character.lastName}
+					</li>
+				)}
+			</ul>
 		</>
 	)
 }
