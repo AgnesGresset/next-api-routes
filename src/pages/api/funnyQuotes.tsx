@@ -1,17 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import characters from './data/charactersData.json'
+import funnyQuotes from './data/funnyQuotesData.json'
 
-export type CharactersProps = {
+export type FunnyQuotesProps = {
 	id: number
-	name: string
-	lastName: string
+  author: string
+	text: string
 }
 
 // Simple example fetching json data stored in App
 // TODO: add POST example and check results with Postman
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
 	 try {
-		res.status(200).json(characters)
+		res.status(200).json(funnyQuotes)
 	} catch (err) {
 		console.log(err)
 	}

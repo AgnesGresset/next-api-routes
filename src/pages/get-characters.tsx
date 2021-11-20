@@ -1,46 +1,28 @@
 import * as React from 'react'
 import { CharactersProps } from './api/characters'
-
-const fetchCharacters = async () => {
-	try {
-		const chararactersReq = await fetch('/api/characters')
-
-		const { status } = chararactersReq
-
-		if (status >= 400) {
-			throw new Error('Problem somewhere')
-		}
-
-		const resData = await chararactersReq.json()
-		return resData
-	} catch (err) {
-		console.log(err)
-		throw new Error('Another problem somehwere else!')
-	}
-}
+import useFechApi from './hooks/useFetchApi'
 
 const Characters = () => {
-	const [data, setData] = React.useState<CharactersProps[]>([])
+	const { fetchData, data, loading } = useFechApi<CharactersProps[]>('characters')
 
-	React.useEffect(() => {
-		fetchCharacters() 
-			.then(resp => resp.data)
-			.then(data => {
-				setData(data)
-		})
-	}, [data])
+  React.useEffect(() => {
+    fetchData()
+  },[])
 
 	return (
-		<>
-			<div>GET Characters</div>
-			<ul>
-				{data.map((character, index) => 
-					<li key={`character${index}`}>
-						{character.name} {character.lastName}
-					</li>
-				)}
-			</ul>
-		</>
+    loading ?
+      <div>LOADING...</div>
+    :
+    <>
+      <div>Characters</div>
+      <ul>
+        {data && data.map((character, index) => 
+          <li key={`character${index}`}>
+            {character.name} {character.lastName}
+          </li>
+        )}
+      </ul>
+    </>
 	)
 }
 	
