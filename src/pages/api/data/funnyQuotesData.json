@@ -1,0 +1,24 @@
+{
+	"data": [
+		{
+			"id": 0,
+			"author": "Margaret Mead",
+			"text": "Always remember that you are absolutely unique. Just like everyone else."
+		},
+		{
+			"id": 1,
+			"author": "Steven Wright",
+			"text": "If at first, you don't succeed, then skydiving definitely isn't for you."
+		},
+		{
+			"id": 2,
+			"author": "Will Ferrell",
+			"text": "Before you marry a person, you should first make them use a computer with slow internet to see who they really are."
+		},
+		{
+			"id": 3,
+			"author": "Bill Watterson",
+			"text": "The surest sign that intelligent life exists elsewhere in the universe is that it has never tried to contact us."
+		}
+	]
+}
