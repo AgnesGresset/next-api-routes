@@ -19,6 +19,16 @@
 			"id": 3,
 			"author": "Bill Watterson",
 			"text": "The surest sign that intelligent life exists elsewhere in the universe is that it has never tried to contact us."
+		},
+		{
+			"id": 4,
+			"author": "W. C. Fields",
+			"text": "I once spent a year in Philadelphia, I think it was on a Sunday."
+		},
+		{
+			"id": 5,
+			"author": "Al Gore",
+			"text": "During my service in the United States Congress, I took the initiative in creating the Internet."
 		}
 	]
 }

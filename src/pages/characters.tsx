@@ -1,5 +1,5 @@
 import * as React from 'react'
-import useFechApi from './hooks/useFetchApi'
+import useFetchApi from './hooks/useFetchApi'
 
 type CharactersProps = {
   id: number
@@ -8,7 +8,7 @@ type CharactersProps = {
 }
 
 const Characters = () => {
-  const { fetchData, data, loading, error } = useFechApi<CharactersProps[]>('characters')
+  const { fetchData, data, loading, error } = useFetchApi<CharactersProps[]>('characters')
 
   React.useEffect(() => {
     fetchData()

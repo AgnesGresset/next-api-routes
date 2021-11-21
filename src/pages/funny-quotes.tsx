@@ -1,26 +1,25 @@
 import * as React from 'react'
-import useFechApi from './hooks/useFetchApi'
-
-type FunnyQuotesProps = {
-	id: number
-  author: string
-	text: string
-}
+import Quote from 'src/components/Quote'
+import { FunnyQuoteProps } from '../components/Quote/Quote'
+import useFetchApi from './hooks/useFetchApi'
 
 const FunnyQuotes = () => {
-	const { fetchData, data, loading, error } = useFechApi<FunnyQuotesProps[]>('funny-quotes')
-  const [ quote, setQuote ] = React.useState<FunnyQuotesProps | undefined>(undefined)
+	const { fetchData, data, loading, error } = useFetchApi<FunnyQuoteProps[]>('funny-quotes')
 
   React.useEffect(() => {
     fetchData()
+  },[])
 
-    data &&
+  const [ quote, setQuote ] = React.useState<FunnyQuoteProps | undefined>(data ? data[0] : undefined)
+
+  React.useEffect(() => {
+    if (data) {
+      const index = Math.floor(data.length * Math.random())
       window.setInterval(() => {
-        console.log('test')
-        const index = Math.floor(data.length * Math.random())
         setQuote(data[index])
       }, 5000)
-
+    }
+    
     // clean up interval on unmount
     return () => {
       window.clearInterval()
@@ -35,11 +34,7 @@ const FunnyQuotes = () => {
         loading ?
           <div>LOADING...</div>
         :
-        quote && 
-          <div>
-            <span>{quote.author}</span>
-            <span>{quote.text}</span>
-          </div>
+        quote && <Quote quote={quote}/>
       }
     </>
 	)
