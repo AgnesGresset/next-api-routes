@@ -9,26 +9,37 @@ type FunnyQuotesProps = {
 
 const FunnyQuotes = () => {
 	const { fetchData, data, loading, error } = useFechApi<FunnyQuotesProps[]>('funny-quotes')
+  const [ quote, setQuote ] = React.useState<FunnyQuotesProps | undefined>(undefined)
 
   React.useEffect(() => {
     fetchData()
+
+    data &&
+      window.setInterval(() => {
+        console.log('test')
+        const index = Math.floor(data.length * Math.random())
+        setQuote(data[index])
+      }, 5000)
+
+    // clean up interval on unmount
+    return () => {
+      window.clearInterval()
+    }
   },[])
 
 	return (
     <>
-      <div>Let's fetch funny quotes</div>
+      <div>Brighten up your day ☀️️</div>
       {error ? <div>{error}</div>
         :
         loading ?
           <div>LOADING...</div>
         :
-        <ul>
-          {data && data.map((quote, index) => 
-            <li key={`character-${index}`}>
-              {quote.author}: {quote.text}
-            </li>
-          )}
-        </ul>
+        quote && 
+          <div>
+            <span>{quote.author}</span>
+            <span>{quote.text}</span>
+          </div>
       }
     </>
 	)
